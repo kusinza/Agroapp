@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "295431875972",
+    "firebase_url": "https://agroapp-763bb.firebaseio.com",
+    "project_id": "agroapp-763bb",
+    "storage_bucket": "agroapp-763bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295431875972:android:7e58197f6e05b3db4ac1d1",
+        "android_client_info": {
+          "package_name": "adam.rao.agroapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295431875972-r7v1bf9067j2h9vkfndrske4scpsddk4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "adam.rao.agroapp",
+            "certificate_hash": "2497ed6601f43a70ca07bdb482cbe193c6cee680"
+          }
+        },
+        {
+          "client_id": "295431875972-qfg89jc9899om91iofvcig8ebefe8hef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD68ZTGgqiAaBlPrv0mosmX94VkMna64w4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295431875972-qfg89jc9899om91iofvcig8ebefe8hef.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
