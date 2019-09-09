@@ -18,7 +18,6 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var signInLink: TextView
     private lateinit var signUpBtn: Button
-    private lateinit var etUsername: TextInputEditText
     private lateinit var etEmail: TextInputEditText
     private lateinit var etPassword: TextInputEditText
     private lateinit var etConfirmPassword: TextInputEditText
@@ -36,7 +35,6 @@ class SignUpActivity : AppCompatActivity() {
 
         signInLink = findViewById(R.id.tv_sign_in_link)
         signUpBtn = findViewById(R.id.btnSignUp)
-        etUsername = findViewById(R.id.username_input)
         etEmail = findViewById(R.id.email_input)
         etPassword = findViewById(R.id.password_input)
         etConfirmPassword = findViewById(R.id.confirm_password_input)
