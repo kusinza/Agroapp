@@ -58,7 +58,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signUpUser(email: String, password: String) {
-        mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
+        mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if(task.isSuccessful) {
                 Log.d(TAG, "SignUp successful")
                 Toast.makeText(this, "Registration Successful, check email for verification link", Toast.LENGTH_LONG).show()
