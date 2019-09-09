@@ -1,8 +1,12 @@
 package adam.rao.agroapp.utils
 
 import adam.rao.agroapp.R
+import adam.rao.agroapp.SignInActivity
+import adam.rao.agroapp.SignUpActivity
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 
 fun checkEmailAndPasswordNotEmpty(context: Context, email: String, password: String): Boolean {
     return if(email.isNotEmpty() && password.isNotEmpty()) {
@@ -25,4 +29,24 @@ fun checkPasswordAndConfirmPasswordMatch(context: Context, password: String, con
     }
 
     return false
+}
+
+fun attachFirebaseAuthStateListener(arg: FirebaseAuth.AuthStateListener) {
+    FirebaseAuth.getInstance().addAuthStateListener(arg)
+}
+
+fun dettachFirebaseAuthStateListener(arg: FirebaseAuth.AuthStateListener) {
+    FirebaseAuth.getInstance().removeAuthStateListener(arg)
+}
+
+fun userHasNoAccount(context: Context) {
+    val intent = Intent(context, SignUpActivity::class.java)
+    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    context.startActivity(intent)
+}
+
+fun userHasAccountButEmailNotVerified(context: Context) {
+    val intent = Intent(context, SignInActivity::class.java)
+    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    context.startActivity(intent)
 }

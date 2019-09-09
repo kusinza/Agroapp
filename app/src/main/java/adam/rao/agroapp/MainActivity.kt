@@ -1,29 +1,46 @@
 package adam.rao.agroapp
 
+import adam.rao.agroapp.utils.attachFirebaseAuthStateListener
+import adam.rao.agroapp.utils.dettachFirebaseAuthStateListener
+import adam.rao.agroapp.utils.userHasAccountButEmailNotVerified
+import adam.rao.agroapp.utils.userHasNoAccount
 import android.Manifest
 import android.content.pm.PackageManager
-import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
     private val mRequestCode = 101
     private val locationPermission = Manifest.permission.ACCESS_COARSE_LOCATION
+    private lateinit var firebaseAuthStateListener: FirebaseAuth.AuthStateListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        checkUserSignedIn()
         setUpLocation()
 
         val seedInput = findViewById<TextInputEditText>(R.id.seed_input)
         val landSizeInput = findViewById<TextInputEditText>(R.id.land_size_input)
-        val submitBtn = findViewById<MaterialButton>(R.id.btnSubmit)
+        val submitBtn = findViewById<Button>(R.id.btnSubmit)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        attachFirebaseAuthStateListener(firebaseAuthStateListener)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        dettachFirebaseAuthStateListener(firebaseAuthStateListener)
     }
 
     private fun setUpLocation() {
@@ -42,6 +59,21 @@ class MainActivity : AppCompatActivity() {
             return
         } else {
             ActivityCompat.shouldShowRequestPermissionRationale(this, locationPermission)
+        }
+    }
+
+    private fun checkUserSignedIn() {
+        firebaseAuthStateListener = FirebaseAuth.AuthStateListener { auth ->
+            val user = auth.currentUser
+            if (user == null) {
+                Toast.makeText(this, "Please create an account", Toast.LENGTH_LONG).show()
+                userHasNoAccount(this)
+            } else {
+                if(!user.isEmailVerified) {
+                    Toast.makeText(this, "Please verify your email address", Toast.LENGTH_LONG).show()
+                    userHasAccountButEmailNotVerified(this)
+                }
+            }
         }
     }
 }
