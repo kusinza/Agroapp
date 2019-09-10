@@ -1,16 +1,14 @@
 package adam.rao.agroapp
 
 import adam.rao.agroapp.utils.checkEmailAndPasswordNotEmpty
+import adam.rao.agroapp.utils.resetPassword
+import adam.rao.agroapp.utils.signInUser
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 class SignInActivity : AppCompatActivity() {
 
@@ -19,8 +17,6 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var etPassword: TextInputEditText
     private lateinit var etEmail: TextInputEditText
     private lateinit var btnSignIn: Button
-    private lateinit var mFirebaseAuth: FirebaseAuth
-    private var mFirebaseUser: FirebaseUser? = null
     private lateinit var email: String
     private lateinit var password: String
     private var emailPasswordNotEmpty: Boolean? = null
@@ -28,8 +24,6 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
-
-        mFirebaseAuth = FirebaseAuth.getInstance()
 
         btnSignIn = findViewById(R.id.btnSignIn)
         etEmail = findViewById(R.id.email_input)
@@ -44,27 +38,15 @@ class SignInActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        forgotPasswordLink.setOnClickListener {
+            resetPassword(this@SignInActivity)
+        }
+
         btnSignIn.setOnClickListener {
             emailPasswordNotEmpty = checkEmailAndPasswordNotEmpty(this, email, password)
 
             if(emailPasswordNotEmpty != false) {
-                signInUser()
-            }
-        }
-    }
-
-    private fun signInUser() {
-        mFirebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {task ->
-            if(task.isSuccessful) {
-                mFirebaseUser = mFirebaseAuth.currentUser
-                if(!mFirebaseUser!!.isEmailVerified) {
-                    Toast.makeText(this, "Please verify your email", Toast.LENGTH_LONG).show()
-                } else {
-                    intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
-            }else {
-                Toast.makeText(this, "Sign In Failed. Do you have an account?", Toast.LENGTH_LONG).show()
+                signInUser(email, password, this@SignInActivity)
             }
         }
     }

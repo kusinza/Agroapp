@@ -1,5 +1,6 @@
 package adam.rao.agroapp.utils
 
+import adam.rao.agroapp.MainActivity
 import adam.rao.agroapp.R
 import adam.rao.agroapp.SignInActivity
 import adam.rao.agroapp.SignUpActivity
@@ -53,11 +54,12 @@ fun userHasAccountButEmailNotVerified(context: Context) {
     context.startActivity(intent)
 }
 
-fun resetPassword(email: String, context: Context) {
-    FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener { task ->
+fun resetPassword(context: Context) {
+    FirebaseAuth.getInstance().sendPasswordResetEmail(
+        FirebaseAuth.getInstance().currentUser!!.email as String
+    ).addOnCompleteListener { task ->
         if(task.isSuccessful) {
             Toast.makeText(context, "Password Reset Link sent to Email", Toast.LENGTH_LONG).show()
-            signOut()
         }
     }
 }
@@ -84,6 +86,47 @@ fun resetEmailAddress(email: String, password: String, context: Context) {
     }.addOnFailureListener { e ->
         Toast.makeText(context, "Failed to Re-authenticate", Toast.LENGTH_LONG).show()
         Log.d("TAG", e.message)
+    }
+}
+
+fun signInUser(email: String, password: String, context: Context) {
+    FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener {task ->
+        if(task.isSuccessful) {
+            val mFirebaseUser = FirebaseAuth.getInstance().currentUser
+            if(!mFirebaseUser!!.isEmailVerified) {
+                Toast.makeText(context, "Please verify your email", Toast.LENGTH_LONG).show()
+            } else {
+                val intent = Intent(context, MainActivity::class.java)
+                context.startActivity(intent)
+            }
+        }else {
+            Toast.makeText(context, "Sign In Failed. Do you have an account?", Toast.LENGTH_LONG).show()
+        }
+    }
+}
+
+fun signUpUser(email: String, password: String, context: Context) {
+    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+        if(task.isSuccessful) {
+            Log.d("TAG", "SignUp successful")
+            Toast.makeText(context, "Registration Successful, check email for verification link", Toast.LENGTH_LONG).show()
+            sendVerificationEmail()
+            val intent = Intent(context, SignInActivity::class.java)
+            context.startActivity(intent)
+            signOut()
+        } else {
+            Log.d("TAG", "SignUp unsuccessful")
+            Toast.makeText(context, "Registration Failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+
+fun sendVerificationEmail() {
+    val mFirebaseUser = FirebaseAuth.getInstance().currentUser
+    if(mFirebaseUser != null) {
+        if(!mFirebaseUser.isEmailVerified) {
+            mFirebaseUser.sendEmailVerification()
+        }
     }
 }
 

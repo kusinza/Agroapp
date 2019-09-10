@@ -2,6 +2,7 @@ package adam.rao.agroapp
 
 import adam.rao.agroapp.utils.checkEmailAndPasswordNotEmpty
 import adam.rao.agroapp.utils.checkPasswordAndConfirmPasswordMatch
+import adam.rao.agroapp.utils.signUpUser
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -52,32 +53,7 @@ class SignUpActivity : AppCompatActivity() {
                 etEmail.text.toString(), etConfirmPassword.text.toString())
 
             if(passwordsMatch as Boolean != false && emailPasswordFieldNotEmpty as Boolean != false ) {
-                signUpUser(etEmail.text.toString(), etConfirmPassword.text.toString())
-            }
-        }
-    }
-
-    private fun signUpUser(email: String, password: String) {
-        mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-            if(task.isSuccessful) {
-                Log.d(TAG, "SignUp successful")
-                Toast.makeText(this, "Registration Successful, check email for verification link", Toast.LENGTH_LONG).show()
-                sendVerificationEmail()
-                intent = Intent(this, SignInActivity::class.java)
-                startActivity(intent)
-                mFirebaseAuth.signOut()
-            } else {
-                Log.d(TAG, "SignUp unsuccessful")
-                Toast.makeText(this, "Registration Failed", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun sendVerificationEmail() {
-        mFirebaseUser = mFirebaseAuth.currentUser
-        if(mFirebaseUser != null) {
-            if(!mFirebaseUser!!.isEmailVerified) {
-               mFirebaseUser!!.sendEmailVerification()
+                signUpUser(etEmail.text.toString(), etConfirmPassword.text.toString(), this@SignUpActivity)
             }
         }
     }
