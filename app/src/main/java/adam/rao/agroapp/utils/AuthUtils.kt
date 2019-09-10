@@ -130,8 +130,8 @@ fun sendVerificationEmail() {
     }
 }
 
-fun checkUserSignedIn(context: Context) {
-    FirebaseAuth.AuthStateListener { auth ->
+fun checkUserSignedIn(context: Context): FirebaseAuth.AuthStateListener {
+    return FirebaseAuth.AuthStateListener { auth ->
         val user = auth.currentUser
         if (user == null) {
             Toast.makeText(context, "Please create an account", Toast.LENGTH_LONG).show()
