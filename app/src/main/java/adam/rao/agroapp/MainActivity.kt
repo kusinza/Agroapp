@@ -1,9 +1,6 @@
 package adam.rao.agroapp
 
-import adam.rao.agroapp.utils.attachFirebaseAuthStateListener
-import adam.rao.agroapp.utils.dettachFirebaseAuthStateListener
-import adam.rao.agroapp.utils.userHasAccountButEmailNotVerified
-import adam.rao.agroapp.utils.userHasNoAccount
+import adam.rao.agroapp.utils.*
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        checkUserSignedIn()
+        checkUserSignedIn(this@MainActivity)
         setUpLocation()
 
         val seedInput = findViewById<TextInputEditText>(R.id.seed_input)
@@ -59,21 +56,6 @@ class MainActivity : AppCompatActivity() {
             return
         } else {
             ActivityCompat.shouldShowRequestPermissionRationale(this, locationPermission)
-        }
-    }
-
-    private fun checkUserSignedIn() {
-        firebaseAuthStateListener = FirebaseAuth.AuthStateListener { auth ->
-            val user = auth.currentUser
-            if (user == null) {
-                Toast.makeText(this, "Please create an account", Toast.LENGTH_LONG).show()
-                userHasNoAccount(this)
-            } else {
-                if(!user.isEmailVerified) {
-                    Toast.makeText(this, "Please verify your email address", Toast.LENGTH_LONG).show()
-                    userHasAccountButEmailNotVerified(this)
-                }
-            }
         }
     }
 }
