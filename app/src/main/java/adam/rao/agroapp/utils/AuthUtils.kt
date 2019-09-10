@@ -57,7 +57,7 @@ fun resetPassword(email: String, context: Context) {
     FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener { task ->
         if(task.isSuccessful) {
             Toast.makeText(context, "Password Reset Link sent to Email", Toast.LENGTH_LONG).show()
-            FirebaseAuth.getInstance().signOut()
+            signOut()
         }
     }
 }
@@ -75,7 +75,7 @@ fun resetEmailAddress(email: String, password: String, context: Context) {
                         if(task2.isSuccessful) {
                             Toast.makeText(context, "Email Reset Successful", Toast.LENGTH_LONG).show()
                             FirebaseAuth.getInstance().currentUser!!.sendEmailVerification()
-                            FirebaseAuth.getInstance().signOut()
+                            signOut()
                         }
                     }
                 }
@@ -85,4 +85,8 @@ fun resetEmailAddress(email: String, password: String, context: Context) {
         Toast.makeText(context, "Failed to Re-authenticate", Toast.LENGTH_LONG).show()
         Log.d("TAG", e.message)
     }
+}
+
+fun signOut() {
+    FirebaseAuth.getInstance().signOut()
 }
