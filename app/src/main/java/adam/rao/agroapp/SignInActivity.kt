@@ -5,6 +5,7 @@ import adam.rao.agroapp.utils.signInUser
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
@@ -24,8 +25,8 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
 
         btnSignIn = findViewById(R.id.btnSignIn)
-        etEmail = findViewById(R.id.email_input)
-        etPassword = findViewById(R.id.password_input)
+        etEmail = findViewById(R.id.email_addr_input)
+        etPassword = findViewById(R.id.password_user_input)
         signUpLink = findViewById(R.id.tv_sign_up_link)
         forgotPasswordLink = findViewById(R.id.tv_forgot_password_link)
 
@@ -43,6 +44,10 @@ class SignInActivity : AppCompatActivity() {
 
         btnSignIn.setOnClickListener {
             signInUser(email, password, this@SignInActivity)
+//            Log.d("email", email)
+//            Log.d("password", password)
+
+            //TODO email and password edittext texts keep on coming empty
         }
     }
 }
