@@ -1,6 +1,5 @@
 package adam.rao.agroapp
 
-import adam.rao.agroapp.utils.checkEmailAndPasswordNotEmpty
 import adam.rao.agroapp.utils.resetPassword
 import adam.rao.agroapp.utils.signInUser
 import android.content.Intent
@@ -19,7 +18,6 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var btnSignIn: Button
     private lateinit var email: String
     private lateinit var password: String
-    private var emailPasswordNotEmpty: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

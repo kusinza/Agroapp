@@ -1,3 +1,5 @@
 package adam.rao.agroapp.models
 
-data class Details(val plantType: String, val numOfSeedsSowed: String, val landSizeInput: String)
+import android.location.Location
+
+data class Details(val plantType: String, val numOfSeedsSowed: String, val landSizeInput: String, val location: Location?)

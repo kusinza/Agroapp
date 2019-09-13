@@ -4,6 +4,7 @@ import adam.rao.agroapp.models.Details
 import adam.rao.agroapp.utils.*
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val locationPermission = Manifest.permission.ACCESS_COARSE_LOCATION
     private lateinit var firebaseAuthStateListener: FirebaseAuth.AuthStateListener
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var location: Location
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +40,11 @@ class MainActivity : AppCompatActivity() {
         val submitBtn = findViewById<Button>(R.id.btnSubmit)
 
         submitBtn.setOnClickListener {
-            insertToDatabase("details", Details(
+            insertToDatabase(FirebaseAuth.getInstance().currentUser!!.uid, Details(
                 plantType.text.toString(),
                 seedInput.text.toString(),
-                landSizeInput.text.toString()
+                landSizeInput.text.toString(),
+                location
             ))
         }
     }
@@ -64,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
             fusedLocationClient.lastLocation.addOnCompleteListener {task ->
                 //todo
-
+                location = task.result as Location
             }
         }
     }
