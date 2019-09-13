@@ -29,6 +29,7 @@ class SignInActivity : AppCompatActivity() {
         etEmail = findViewById(R.id.email_input)
         etPassword = findViewById(R.id.password_input)
         signUpLink = findViewById(R.id.tv_sign_up_link)
+        forgotPasswordLink = findViewById(R.id.tv_forgot_password_link)
 
         email = etEmail.text.toString()
         password = etPassword.text.toString()
@@ -43,11 +44,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         btnSignIn.setOnClickListener {
-            emailPasswordNotEmpty = checkEmailAndPasswordNotEmpty(this, email, password)
-
-            if(emailPasswordNotEmpty != false) {
-                signInUser(email, password, this@SignInActivity)
-            }
+            signInUser(email, password, this@SignInActivity)
         }
     }
 }

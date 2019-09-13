@@ -24,4 +24,5 @@
     <string name="empty_email_and_pass_fields">Ensure both email and password fields are not empty</string>
     <string name="password_confirm_password_not_match">Password and Confirm Password fields should match</string>
     <string name="plant_sowed">Plant sowed?</string>
+    <string name="log_out">Log Out</string>
 </resources>

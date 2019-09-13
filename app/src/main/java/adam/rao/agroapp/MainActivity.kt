@@ -6,6 +6,9 @@ import android.Manifest
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -59,8 +62,9 @@ class MainActivity : AppCompatActivity() {
             return
         } else {
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-            fusedLocationClient.lastLocation.addOnCompleteListener {
+            fusedLocationClient.lastLocation.addOnCompleteListener {task ->
                 //todo
+
             }
         }
     }
@@ -75,5 +79,23 @@ class MainActivity : AppCompatActivity() {
         } else {
             ActivityCompat.shouldShowRequestPermissionRationale(this, locationPermission)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.general_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item!!.itemId) {
+            R.id.logout -> {
+                signOut()
+                true
+            }
+            else ->
+                super.onOptionsItemSelected(item)
+        }
+
     }
 }
