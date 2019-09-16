@@ -1,5 +1,6 @@
 package adam.rao.agroapp
 
+import adam.rao.agroapp.utils.checkEmailAndPasswordNotEmpty
 import adam.rao.agroapp.utils.resetPassword
 import adam.rao.agroapp.utils.signInUser
 import android.content.Intent
@@ -30,9 +31,6 @@ class SignInActivity : AppCompatActivity() {
         signUpLink = findViewById(R.id.tv_sign_up_link)
         forgotPasswordLink = findViewById(R.id.tv_forgot_password_link)
 
-        email = etEmail.text.toString()
-        password = etPassword.text.toString()
-
         signUpLink.setOnClickListener {
             intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
@@ -43,11 +41,12 @@ class SignInActivity : AppCompatActivity() {
         }
 
         btnSignIn.setOnClickListener {
-            signInUser(email, password, this@SignInActivity)
-//            Log.d("email", email)
-//            Log.d("password", password)
+            email = etEmail.text.toString()
+            password = etPassword.text.toString()
 
-            //TODO email and password edittext texts keep on coming empty
+            if(!checkEmailAndPasswordNotEmpty(this@SignInActivity, email, password)) {
+                signInUser(email, password, this@SignInActivity)
+            }
         }
     }
 }

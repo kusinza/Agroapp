@@ -93,6 +93,9 @@ class MainActivity : AppCompatActivity() {
                 signOut()
                 true
             }
+            R.id.reset_email -> {
+                true
+            }
             else ->
                 super.onOptionsItemSelected(item)
         }

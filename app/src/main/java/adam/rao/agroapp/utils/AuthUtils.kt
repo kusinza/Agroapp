@@ -12,7 +12,7 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
 fun checkEmailAndPasswordNotEmpty(context: Context, email: String, password: String): Boolean {
-    return if(email.length > 0 && password.length > 0) {
+    return if(email.isNotEmpty() && password.isNotEmpty()) {
         true
     } else {
         Toast.makeText(context, context.getString(R.string.empty_email_and_pass_fields), Toast.LENGTH_LONG).show()
