@@ -76,7 +76,7 @@ fun resetEmailAddress(email: String, password: String, context: Context) {
                 } else {
                     FirebaseAuth.getInstance().currentUser!!.updateEmail(email).addOnCompleteListener { task2 ->
                         if(task2.isSuccessful) {
-                            Toast.makeText(context, "Email Reset Successful", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, "Email Reset Successful, verification email sent", Toast.LENGTH_LONG).show()
                             FirebaseAuth.getInstance().currentUser!!.sendEmailVerification()
                             signOut()
                         }
