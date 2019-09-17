@@ -92,8 +92,22 @@
                 android:textColor="@color/colorLinks"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_sign_up_link" />
+                app:layout_constraintTop_toBottomOf="@id/tv_sign_up_link"
+                app:layout_constraintVertical_bias="0.0" />
+
+        <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="176dp"
+                android:layout_height="174dp"
+                android:layout_marginTop="32dp"
+                android:indeterminate="true"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_forgot_password_link" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val locationPermission = Manifest.permission.ACCESS_COARSE_LOCATION
     private lateinit var firebaseAuthStateListener: FirebaseAuth.AuthStateListener
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var location: Location
+    private var location: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
             fusedLocationClient.lastLocation.addOnCompleteListener {task ->
-                location = task.result as Location
+                location = task.result
             }
         }
     }
