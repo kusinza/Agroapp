@@ -3,6 +3,7 @@ package adam.rao.agroapp
 import adam.rao.agroapp.models.Details
 import adam.rao.agroapp.utils.*
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
@@ -94,6 +95,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.reset_email -> {
+                startActivity(Intent(this@MainActivity, EmailResetActivity::class.java))
                 true
             }
             else ->

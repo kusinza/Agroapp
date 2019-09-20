@@ -55,10 +55,8 @@ fun userHasAccountButEmailNotVerified(context: Context) {
     context.startActivity(intent)
 }
 
-fun resetPassword(context: Context) {
-    FirebaseAuth.getInstance().sendPasswordResetEmail(
-        FirebaseAuth.getInstance().currentUser!!.email as String
-    ).addOnCompleteListener { task ->
+fun resetPassword(email: String, context: Context) {
+    FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener { task ->
         if(task.isSuccessful) {
             Toast.makeText(context, "Password Reset Link sent to Email", Toast.LENGTH_LONG).show()
         }

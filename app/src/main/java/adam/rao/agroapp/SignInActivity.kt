@@ -40,7 +40,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         forgotPasswordLink.setOnClickListener {
-            resetPassword(this@SignInActivity)
+            startActivity(Intent(this@SignInActivity, PasswordResetActivity::class.java))
         }
 
         btnSignIn.setOnClickListener {

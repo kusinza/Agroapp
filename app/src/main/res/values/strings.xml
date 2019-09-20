@@ -26,4 +26,8 @@
     <string name="plant_sowed">Plant sowed?</string>
     <string name="log_out">Log Out</string>
     <string name="reset_email">Reset Email</string>
+    <string name="send_password_reset">Send Password Reset Link</string>
+    <string name="new_email_address">Enter new email address</string>
+    <string name="reset_email_addr">Reset Email Address</string>
+    <string name="enter_password">Enter password</string>
 </resources>
