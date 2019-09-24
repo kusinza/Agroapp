@@ -1,9 +1,6 @@
 package adam.rao.agroapp.utils
 
-import adam.rao.agroapp.MainActivity
-import adam.rao.agroapp.R
-import adam.rao.agroapp.SignInActivity
-import adam.rao.agroapp.SignUpActivity
+import adam.rao.agroapp.*
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -18,7 +15,6 @@ fun checkEmailAndPasswordNotEmpty(context: Context, email: String, password: Str
         Toast.makeText(context, context.getString(R.string.empty_email_and_pass_fields), Toast.LENGTH_LONG).show()
         false
     }
-    // TODO keeps returning false
 }
 
 fun checkPasswordAndConfirmPasswordMatch(context: Context, password: String, confirmPassword: String): Boolean {
@@ -95,7 +91,7 @@ fun signInUser(email: String, password: String, context: Context) {
             if(!mFirebaseUser!!.isEmailVerified) {
                 Toast.makeText(context, "Please verify your email", Toast.LENGTH_LONG).show()
             } else {
-                val intent = Intent(context, MainActivity::class.java)
+                val intent = Intent(context, BaseActivity::class.java)
                 context.startActivity(intent)
             }
         }else {
