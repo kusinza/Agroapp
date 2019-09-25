@@ -51,4 +51,6 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="notifications">Notifications</string>
+    <string name="proceed">Proceed</string>
+    <string name="plant_image">Plant Image</string>
 </resources>

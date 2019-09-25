@@ -4,6 +4,8 @@ import adam.rao.agroapp.utils.attachFirebaseAuthStateListener
 import adam.rao.agroapp.utils.checkUserSignedIn
 import adam.rao.agroapp.utils.dettachFirebaseAuthStateListener
 import adam.rao.agroapp.utils.signOut
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -17,6 +19,10 @@ import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 
 class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -25,12 +31,17 @@ class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var firebaseAuthStateListener: FirebaseAuth.AuthStateListener
     private lateinit var userName: TextView
     private lateinit var email: TextView
+    private val mRequestCode = 101
+    private val locationPermission = Manifest.permission.ACCESS_COARSE_LOCATION
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        setUpLocation()
 
         userName = findViewById(R.id.tvUserName)
         email = findViewById(R.id.tvEmailAddress)
@@ -44,8 +55,8 @@ class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send
+                R.id.nav_home, R.id.details, R.id.plant_choice,
+                R.id.nav_tools, R.id.nav_share, R.id.notifications
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -91,8 +102,32 @@ class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         dettachFirebaseAuthStateListener(firebaseAuthStateListener)
     }
 
-    fun setUpUserEmailAndUserNameTexts() {
+    private fun setUpUserEmailAndUserNameTexts() {
         userName.text = FirebaseAuth.getInstance().currentUser!!.displayName
         email.text = FirebaseAuth.getInstance().currentUser!!.email
+    }
+
+
+    private fun setUpLocation() {
+        if(ContextCompat.checkSelfPermission(this, locationPermission) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(locationPermission), mRequestCode)
+            return
+        } else {
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            fusedLocationClient.lastLocation.addOnCompleteListener {
+                //TODO
+            }
+        }
+    }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if(requestCode == mRequestCode && grantResults.isNotEmpty()) {
+            return
+        } else {
+            ActivityCompat.shouldShowRequestPermissionRationale(this, locationPermission)
+        }
     }
 }
