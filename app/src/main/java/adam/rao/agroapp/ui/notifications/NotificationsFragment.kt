@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import adam.rao.agroapp.R
 import adam.rao.agroapp.adapters.NotificationAdapter
 import adam.rao.agroapp.models.Notification
+import adam.rao.agroapp.utils.addNotifications
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -16,7 +17,7 @@ class NotificationsFragment : Fragment() {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
     private lateinit var notificationRecyclerView: RecyclerView
-    private lateinit var notificationList: List<Notification>
+    private lateinit var notificationList: ArrayList<Notification>
     private lateinit var adapter: NotificationAdapter
 
     override fun onCreateView(
@@ -28,8 +29,11 @@ class NotificationsFragment : Fragment() {
             ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_notifications, container, false)
 
-        adapter = NotificationAdapter(context!!.applicationContext, notificationList)
+        if(notificationList.size == 0){
+            addNotifications(notificationList)
+        }
 
+        adapter = NotificationAdapter(context!!.applicationContext, notificationList)
         notificationRecyclerView = root.findViewById(R.id.notification_recycler_view)
         notificationRecyclerView.adapter = adapter
         notificationRecyclerView.layoutManager = LinearLayoutManager(context!!.applicationContext)
