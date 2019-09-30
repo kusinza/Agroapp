@@ -26,7 +26,11 @@
             android:id="@+id/details"
             android:name="adam.rao.agroapp.ui.details.DetailsFragment"
             android:label="Details"
-            tools:layout="@layout/fragment_details" />
+            tools:layout="@layout/fragment_details" >
+        <action
+                android:id="@+id/action_details_to_nav_share"
+                app:destination="@id/seed_input" />
+    </fragment>
 
     <fragment
             android:id="@+id/plant_choice"
@@ -41,16 +45,20 @@
     </fragment>
 
     <fragment
-            android:id="@+id/nav_tools"
-            android:name="adam.rao.agroapp.ui.tools.ToolsFragment"
-            android:label="@string/menu_tools"
-            tools:layout="@layout/fragment_tools" />
+            android:id="@+id/expected_output"
+            android:name="adam.rao.agroapp.ui.output.OutputFragment"
+            android:label="Expected Output"
+            tools:layout="@layout/fragment_output" />
 
     <fragment
-            android:id="@+id/nav_share"
-            android:name="adam.rao.agroapp.ui.share.ShareFragment"
-            android:label="@string/menu_share"
-            tools:layout="@layout/fragment_share" />
+            android:id="@+id/seed_input"
+            android:name="adam.rao.agroapp.ui.seed_input.SeedInputFragment"
+            android:label="Seed Input"
+            tools:layout="@layout/fragment_seed_input">
+        <action
+                android:id="@+id/action_nav_share_to_nav_tools"
+                app:destination="@id/expected_output" />
+    </fragment>
 
     <fragment
             android:id="@+id/notifications"

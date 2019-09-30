@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import adam.rao.agroapp.R
+import adam.rao.agroapp.utils.genRandomNum
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 
 class DetailsFragment : Fragment() {
 
@@ -22,10 +25,21 @@ class DetailsFragment : Fragment() {
         detailsViewModel =
             ViewModelProviders.of(this).get(DetailsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_details, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
-        detailsViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+
+        val manureQuantity = root.findViewById<TextView>(R.id.manure_quantity)
+        val waterQuantity = root.findViewById<TextView>(R.id.water_quantity)
+        val btnProceed = root.findViewById<Button>(R.id.btnContinue)
+
+        val manure = genRandomNum()
+        val waterNeeded = genRandomNum()
+
+        manureQuantity.text = manure.toString()
+        waterQuantity.text = waterNeeded.toString()
+
+        btnProceed.setOnClickListener {
+            findNavController().navigate(R.id.seed_input)
+        }
+
         return root
     }
 }

@@ -56,7 +56,7 @@ class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.details, R.id.plant_choice,
-                R.id.nav_tools, R.id.nav_share, R.id.notifications
+                R.id.expected_output, R.id.seed_input, R.id.notifications
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -84,7 +84,7 @@ class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 true
             }
             R.id.nav_notification -> {
-                //TODO
+                findNavController(R.id.nav_host_fragment).navigate(R.id.notifications)
                 true
             }
             else ->

@@ -5,5 +5,5 @@ fun genRandomNum(): Int {
 }
 
 fun expectedOutput(): Int {
-    return (100..10000).random()
+    return (1000..100000).random()
 }

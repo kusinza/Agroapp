@@ -53,4 +53,8 @@
     <string name="notifications">Notifications</string>
     <string name="proceed">Proceed</string>
     <string name="plant_image">Plant Image</string>
+    <string name="manure_needed">Manure Needed:</string>
+    <string name="water_needed">Water Needed:</string>
+    <string name="seed_output">Seed Output</string>
+    <string name="output_expected">Output Expected:</string>
 </resources>
