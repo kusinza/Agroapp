@@ -8,7 +8,7 @@ Mobile App that facilitate farmer in thier dailly activities
 # Team
 
 
-KU team kenya 
+Engeneers Team  
 Innocent Kusinze IEEE member innocentumugu@gmail.com
 Fidel Makatia IEEE member fidelmakatia01@gmail.com
 Adam non IEEE member 
