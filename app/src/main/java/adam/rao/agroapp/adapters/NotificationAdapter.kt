@@ -30,6 +30,6 @@ class NotificationAdapter(private val context: Context, private val notification
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val notification = notificationList[position]
         holder.notificationTitle.text = notification.title
-        holder.notificationDescription.text = notification.description
+        holder.notificationDescription.text ="${notification.description} \n ${notification.harvest}"
     }
 }

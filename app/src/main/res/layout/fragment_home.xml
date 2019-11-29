@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/land_size_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/land_size"
-            android:layout_margin="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_margin="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/land_size_input"
@@ -25,7 +23,7 @@
 
     <Button
             android:id="@+id/btnProceed"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/proceed"
             android:textColor="@color/colorSecondaryBeta"
@@ -35,4 +33,29 @@
             app:layout_constraintTop_toBottomOf="@id/land_size_input_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/toolbarthem"
+        android:orientation="vertical"
+            android:padding="3dp">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current Plants"/>
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/plant_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,9 +1,6 @@
 package adam.rao.agroapp
 
-import adam.rao.agroapp.utils.attachFirebaseAuthStateListener
-import adam.rao.agroapp.utils.checkUserSignedIn
-import adam.rao.agroapp.utils.dettachFirebaseAuthStateListener
-import adam.rao.agroapp.utils.signOut
+import adam.rao.agroapp.utils.*
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -21,9 +18,15 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.nav_header_base.*
+
+
 
 class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,6 +37,10 @@ class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val mRequestCode = 101
     private val locationPermission = Manifest.permission.ACCESS_COARSE_LOCATION
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var drawerLayout:DrawerLayout
+    private lateinit var  mAuth: FirebaseUser
+
+    lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,25 +49,31 @@ class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         setUpLocation()
+        firebaseAuthStateListener = checkUserSignedIn(this@BaseActivity)
 
-        userName = findViewById(R.id.tvUserName)
-        email = findViewById(R.id.tvEmailAddress)
+        mAuth= getAuthInstance()
+        db= FirebaseFirestore.getInstance()
+         drawerLayout = findViewById(R.id.drawer_layout)
+        val navView: NavigationView = findViewById(R.id.nav_view)
+
+        userName=navView.getHeaderView(0).findViewById<TextView>(R.id.tvUserName)
+
+        email = navView.getHeaderView(0).findViewById<TextView>(R.id.tvEmailAddress)
 
         setUpUserEmailAndUserNameTexts()
 
-        firebaseAuthStateListener = checkUserSignedIn(this@BaseActivity)
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.details, R.id.plant_choice,
-                R.id.expected_output, R.id.seed_input, R.id.notifications
+                R.id.expected_output, R.id.seed_input, R.id.nav_notification
             ), drawerLayout
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        navView.setNavigationItemSelectedListener(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -76,15 +89,19 @@ class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.nav_logout -> {
+                drawerLayout.closeDrawer(GravityCompat.START);
+
                 signOut()
                 true
             }
             R.id.nav_home -> {
                 findNavController(R.id.nav_host_fragment).navigate(R.id.nav_home)
+                drawerLayout.closeDrawer(GravityCompat.START);
                 true
             }
             R.id.nav_notification -> {
-                findNavController(R.id.nav_host_fragment).navigate(R.id.notifications)
+                findNavController(R.id.nav_host_fragment).navigate(R.id.nav_notification)
+                drawerLayout.closeDrawer(GravityCompat.START);
                 true
             }
             else ->

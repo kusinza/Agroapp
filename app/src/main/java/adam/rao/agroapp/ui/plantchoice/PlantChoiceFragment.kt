@@ -18,7 +18,7 @@ class PlantChoiceFragment : Fragment() {
     private lateinit var slideshowViewModel: PlantChoiceViewModel
     private lateinit var adapter: PlantAdapter
     private lateinit var plantRecyclerView: RecyclerView
-    private lateinit var plantList: ArrayList<Plant>
+    private  var plantList= ArrayList<Plant>()
     private val spanCount = 2
 
     override fun onCreateView(
@@ -34,7 +34,7 @@ class PlantChoiceFragment : Fragment() {
             addPlants(plantList)
         }
 
-        adapter = PlantAdapter(context!!.applicationContext, plantList)
+        adapter = PlantAdapter(context!!.applicationContext, plantList,1)
         plantRecyclerView = root.findViewById(R.id.plant_recycler_view)
         plantRecyclerView.adapter = adapter
         plantRecyclerView.layoutManager = GridLayoutManager(context!!.applicationContext, spanCount)

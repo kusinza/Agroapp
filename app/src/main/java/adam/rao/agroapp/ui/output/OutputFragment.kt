@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import adam.rao.agroapp.R
 import adam.rao.agroapp.utils.expectedOutput
 
+var landsize=""
 class OutputFragment : Fragment() {
 
     private lateinit var outputViewModel: OutputViewModel

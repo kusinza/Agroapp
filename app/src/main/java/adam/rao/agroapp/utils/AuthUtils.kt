@@ -1,12 +1,14 @@
 package adam.rao.agroapp.utils
 
 import adam.rao.agroapp.*
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 fun checkEmailAndPasswordNotEmpty(context: Context, email: String, password: String): Boolean {
     return if(email.isNotEmpty() && password.isNotEmpty()) {
@@ -51,11 +53,14 @@ fun userHasAccountButEmailNotVerified(context: Context) {
     context.startActivity(intent)
 }
 
-fun resetPassword(email: String, context: Context) {
+fun resetPassword(email: String, context: Activity) {
+    val viewDialog=ViewDialog(context)
+    viewDialog.showDialog()
     FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener { task ->
         if(task.isSuccessful) {
             Toast.makeText(context, "Password Reset Link sent to Email", Toast.LENGTH_LONG).show()
         }
+        viewDialog.hideDialog()
     }
 }
 
@@ -84,10 +89,13 @@ fun resetEmailAddress(email: String, password: String, context: Context) {
     }
 }
 
-fun signInUser(email: String, password: String, context: Context) {
+fun signInUser(email: String, password: String, context: Activity) {
+    val viewDialog=ViewDialog(context)
+    viewDialog.showDialog()
     FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener {task ->
         if(task.isSuccessful) {
             val mFirebaseUser = FirebaseAuth.getInstance().currentUser
+            viewDialog.hideDialog()
             if(!mFirebaseUser!!.isEmailVerified) {
                 Toast.makeText(context, "Please verify your email", Toast.LENGTH_LONG).show()
             } else {
@@ -95,14 +103,21 @@ fun signInUser(email: String, password: String, context: Context) {
                 context.startActivity(intent)
             }
         }else {
+            viewDialog.hideDialog()
+
             Toast.makeText(context, "Sign In Failed. Do you have an account?", Toast.LENGTH_LONG).show()
         }
+
     }
 }
 
-fun signUpUser(email: String, password: String, context: Context) {
+fun signUpUser(email: String, password: String, context: Activity) {
+    val viewDialog=ViewDialog(context)
+    viewDialog.showDialog()
     FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
         if(task.isSuccessful) {
+            viewDialog.hideDialog()
+
             Log.d("TAG", "SignUp successful")
             Toast.makeText(context, "Registration Successful, check email for verification link", Toast.LENGTH_LONG).show()
             sendVerificationEmail()
@@ -110,6 +125,8 @@ fun signUpUser(email: String, password: String, context: Context) {
             context.startActivity(intent)
             signOut()
         } else {
+            viewDialog.hideDialog()
+
             Log.d("TAG", "SignUp unsuccessful")
             Toast.makeText(context, "Registration Failed", Toast.LENGTH_SHORT).show()
         }
@@ -124,7 +141,9 @@ fun sendVerificationEmail() {
         }
     }
 }
-
+fun getAuthInstance(): FirebaseUser {
+    return FirebaseAuth.getInstance().currentUser!!
+}
 fun checkUserSignedIn(context: Context): FirebaseAuth.AuthStateListener {
     return FirebaseAuth.AuthStateListener { auth ->
         val user = auth.currentUser

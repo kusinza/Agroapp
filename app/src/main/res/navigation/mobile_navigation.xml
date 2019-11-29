@@ -12,7 +12,7 @@
             tools:layout="@layout/fragment_home" >
         <action
                 android:id="@+id/action_nav_home_to_notifications"
-                app:destination="@id/notifications"
+                app:destination="@id/nav_notification"
                 app:enterAnim="@anim/nav_default_enter_anim"
                 app:exitAnim="@anim/nav_default_exit_anim" />
         <action
@@ -61,7 +61,7 @@
     </fragment>
 
     <fragment
-            android:id="@+id/notifications"
+            android:id="@+id/nav_notification"
             android:name="adam.rao.agroapp.ui.notifications.NotificationsFragment"
             android:label="Notifications"
             tools:layout="@layout/fragment_notifications" />

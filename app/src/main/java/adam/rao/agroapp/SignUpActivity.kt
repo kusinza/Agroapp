@@ -29,7 +29,6 @@ class SignUpActivity : AppCompatActivity() {
     private var passwordsMatch: Boolean? = null
     private var emailPasswordFieldNotEmpty: Boolean? = null
     private var TAG = javaClass.simpleName
-    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +41,6 @@ class SignUpActivity : AppCompatActivity() {
         etEmail = findViewById(R.id.email_input)
         etPassword = findViewById(R.id.password_input)
         etConfirmPassword = findViewById(R.id.confirm_password_input)
-        progressBar = findViewById(R.id.progressBar)
 
         signInLink.setOnClickListener {
             intent = Intent(this, SignInActivity::class.java)
@@ -50,7 +48,6 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         signUpBtn.setOnClickListener {
-            progressBar.visibility = View.VISIBLE
 
             passwordsMatch = checkPasswordAndConfirmPasswordMatch(this,
                 etPassword.text.toString(), etConfirmPassword.text.toString())
@@ -59,7 +56,6 @@ class SignUpActivity : AppCompatActivity() {
 
             if(passwordsMatch as Boolean != false && emailPasswordFieldNotEmpty as Boolean != false ) {
                 signUpUser(etEmail.text.toString(), etConfirmPassword.text.toString(), this@SignUpActivity)
-                progressBar.visibility = View.INVISIBLE
             }
         }
     }

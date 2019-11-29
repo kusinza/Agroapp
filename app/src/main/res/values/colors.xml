@@ -2,9 +2,17 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#55c57a</color>
     <color name="colorSecondary">#55c57a</color>
     <color name="colorSecondaryBeta">#FFFFFF</color>
     <color name="colorCardBackground">#90FFFDFD</color>
     <color name="colorLinks">#2998ff</color>
+    <color name="yvanfirst">#D81B60</color>
+    <color name="yvanfirst1">#E9E0E4</color>
+    <color name="yvanSecond">#506EC5</color>
+    <color name="yvanSecond2">#D3D3DF</color>
+    <color name="mainColor">#FFFFFF</color>
+    <color name="textColor">#FFFFFF</color>
+    <color name="colorPrimary1">#FCFAFB</color>
+    <color name="colorPrimaryDark1">#CECECE</color>
 </resources>
