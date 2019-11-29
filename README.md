@@ -1,4 +1,4 @@
-# Agroapp
+# SmartAgric
 
    <img src="agro_icon.jpg" width="400">
 Mobile App that facilitate farmer in thier dailly activities 
