@@ -4,7 +4,8 @@
    
    
 Mobile App that facilitate farmer in thier dailly activities 
-#Executable and Repository link
+
+# Executable and Repository link
 
 Executable: https://github.com/kusinza/Agroapp/blob/master/AgroAPP.apk  or  https://drive.google.com/open?id=1_OllO4HCeBS8_M_Imx_4t3CIEdHYhzsb
 
