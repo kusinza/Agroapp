@@ -14,10 +14,10 @@ Repository  https://github.com/kusinza/Agroapp
 # Team
 
 
-Engeneers Team__
-Innocent Kusinze IEEE member innocentumugu@gmail.com__
-Fidel Makatia IEEE member fidelmakatia01@gmail.com, Github https://github.com/fidel-makatia__
-Adam non IEEE member__
+Engeneers Team<br/>
+Innocent Kusinze IEEE member innocentumugu@gmail.com<br/>
+Fidel Makatia IEEE member fidelmakatia01@gmail.com, Github https://github.com/fidel-makatia<br/>
+Adam non IEEE member<br/>
 
 
 
@@ -43,7 +43,7 @@ A video Demo link of the app : https://youtu.be/zAkIcmshlTw
 
 This is a mobile application that gives farmers advice on the kind of crop to grow based on thier geographical location and the amount of seed to sow based on land size and terrain. it also gives notifications concerning time to weed, time to harvest ypes, of crop pests associated and drugs to buy and also has a culculator to calculate the amount of harvest expected given amount seeded. this is so as to ensure food security and cub poverty. The app also gives up dates on current farming technologies based on the type of farmer 
 
-#Screenshots
+# Screenshots
 
 
 <img src="https://github.com/kusinza/Agroapp/blob/master/Screenshot_1575013118.png" width="150">
