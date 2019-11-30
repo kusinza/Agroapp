@@ -15,7 +15,7 @@ Repository  https://github.com/kusinza/Agroapp
 
 
 Engeneers Team<br/>
-Innocent Kusinze IEEE member innocentumugu@gmail.com<br/>
+Innocent Kusinze IEEE member innocentumugu@gmail.com, Github https://github.com/kusinza<br/>
 Fidel Makatia IEEE member fidelmakatia01@gmail.com, Github https://github.com/fidel-makatia<br/>
 Adam non IEEE member<br/>
 
